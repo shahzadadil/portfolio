@@ -7,6 +7,7 @@ home.responsibility = function() {
     self.load = () => {
         google.charts.load('current', { 'packages': ['corechart'] });
         google.charts.setOnLoadCallback(loadResponsibility);
+        $(window).resize(loadResponsibility);
 
         function loadResponsibility() {
 
@@ -20,9 +21,17 @@ home.responsibility = function() {
                 ['Hands-On Development', 60]
             ]);            
 
-            const chart = new google.visualization.PieChart(document.getElementById('ResponsibilityChartContainer'));
+            const chartContainer = $("#ResponsibilityChartContainer");
+            const descriptionContainer = $(ResponsibilityDescription);
+            const chart = new google.visualization.PieChart(chartContainer[0]);
+
+            let height = chartContainer.height();
+            let width = chartContainer.width();
+            let descWidth = descriptionContainer.width();
 
             const options = {
+                width: width,
+                height: height,
                 pieHole: 0.3,
                 slices: {
                     0: {offset: 0.4},
