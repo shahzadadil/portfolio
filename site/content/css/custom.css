@@ -1,0 +1,25 @@
+.skill-details .skill {
+    display: inline-block;
+    width: auto;
+    border: 1px solid #dee2e6;
+    border-radius: 0.3rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.25rem;
+    padding: 0.25rem;
+}
+
+.text-linkedin {
+    color: #0a66c2;
+}
+
+.text-github {
+    color: #24292f;
+}
+
+.text-stackoverflow {
+    color: #f48225;
+}
+
+.text-twitter {
+    color: #1d9bf0;
+}
