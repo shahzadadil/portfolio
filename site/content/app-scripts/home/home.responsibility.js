@@ -22,23 +22,21 @@ home.responsibility = function() {
             ]);            
 
             const chartContainer = $("#ResponsibilityChartContainer");
-            const descriptionContainer = $(ResponsibilityDescription);
             const chart = new google.visualization.PieChart(chartContainer[0]);
 
             let height = chartContainer.height();
             let width = chartContainer.width();
-            let descWidth = descriptionContainer.width();
 
             const options = {
                 width: width,
-                height: height,
-                pieHole: 0.3,
+                height: 300,
+                pieHole: 0.4,
                 slices: {
                     0: {offset: 0.4},
                     1: {offset: 0.2},
                 },
                 legend: {
-                    alignment: 'center'
+                    alignment: 'top'
                 },
                 animation: {
                     startup: true,

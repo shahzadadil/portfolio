@@ -3,9 +3,9 @@
     width: auto;
     border: 1px solid #dee2e6;
     border-radius: 0.3rem;
-    margin-right: 0.5rem;
-    margin-bottom: 0.25rem;
-    padding: 0.25rem;
+    margin: 0.3rem 0.2rem;
+    padding: 0.25rem 0.5rem;
+    --bs-bg-opacity: 0.75;
 }
 
 .text-linkedin {
