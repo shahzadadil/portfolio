@@ -6,30 +6,40 @@ const htmlReplace = require("gulp-html-replace");
 const copy = require("gulp-copy");
 const cleanCss = require("gulp-clean-css");
 const concatCss = require("gulp-concat-css");
+const merge = require("merge-stream");
 
 function minifyJs() {
-    let sources = src(
-        'content/js/*.js',
-        //'node_modules/jquery/dist/jquery.min.js',
-        'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js'
-    );
+    const sourcePaths = {
+        bootstrap: "node_modules/bootstrap/dist/js/*.min.js",
+        lib: "content/js/*.js",
+        //jquery: 'node_modules/jquery/dist/jquery.min.js'
+    };
 
-    return sources
-        .pipe(uglify())
-        .pipe(concat('lib.min.js'))
-        .pipe(dest('dist/js/'));
+    const minifyTasks = Object.keys(sourcePaths).map((key) => {
+        return src(sourcePaths[key])
+            .pipe(uglify())
+            .pipe(concat(`${key}.min.js`))
+            .pipe(dest('dist/js/'));
+    });
+    
+    return merge(minifyTasks);
 }
 
-function minifyCss() {
-    let sources = src(
-        'node_modules/bootstrap/dist/css/bootstrap.css',
-        'content/css/custom.css'
-    );
+function minifyCssFiles() {
 
-    return sources
-        .pipe(cleanCss())
-        .pipe(concatCss('dist/lib.min.css'))
-        .pipe(dest('dist/css/'));
+    const sourcePaths = {
+        bootstrap: "node_modules/bootstrap/dist/css/*.min.css",
+        lib: "content/css/*.css"
+    };
+
+    const minifyTasks = Object.keys(sourcePaths).map((key) => {
+        return src(sourcePaths[key])
+            .pipe(concatCss(`${key}.min.css`))
+            .pipe(cleanCss())
+            .pipe(dest('dist/css/'));
+    });
+
+    return merge(minifyTasks);    
 }
 
 function copyImages() {
@@ -49,10 +59,13 @@ function copyIcons() {
 
 function updateHtml() {
     return src('index.html')
-        .pipe(htmlReplace({'js': '../js/lib.min.js', 'css': '../css/lib.min.css' }))
+        .pipe(htmlReplace({
+            'js': ['../js/jquery.min.js', '../js/bootstrap.min.js'], 
+            'css': ['../css/bootstrap.min.css', '../css/lib.min.css']
+        }))
         .pipe(dest('dist/html'));
         
 }
 
 exports.default = this.minify;
-exports.minify = parallel(minifyJs, minifyCss, copyImages, copyFonts,copyIcons, updateHtml);
+exports.minify = parallel(minifyJs, minifyCssFiles, copyImages, copyFonts,copyIcons, updateHtml);
