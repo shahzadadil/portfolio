@@ -1,4 +1,4 @@
-const { parallel, src, dest } = require("gulp");
+const { parallel, src, dest, series } = require("gulp");
 const uglify = require("gulp-uglify");
 const rename = require("gulp-rename");
 const concat = require("gulp-concat");
@@ -7,6 +7,18 @@ const copy = require("gulp-copy");
 const cleanCss = require("gulp-clean-css");
 const concatCss = require("gulp-concat-css");
 const merge = require("merge-stream");
+const del = require("del");
+
+function clean() {
+    return del([
+        "dist/js/**",
+        "dist/css/*.*",
+        "dist/css/fonts/**",
+        "dist/css/icons/**",
+        "dist/images/**",
+        "dist/html/**"
+    ]);
+}
 
 function minifyJs() {
     const sourcePaths = {
@@ -34,7 +46,7 @@ function minifyCssFiles() {
 
     const minifyTasks = Object.keys(sourcePaths).map((key) => {
         return src(sourcePaths[key])
-            .pipe(concatCss(`${key}.min.css`))
+            //.pipe(concatCss(`${key}.min.css`))
             .pipe(cleanCss())
             .pipe(dest('dist/css/'));
     });
@@ -53,7 +65,7 @@ function copyFonts() {
 }
 
 function copyIcons() {
-    return src('node_modules/bootstrap-icons/icons/*')
+    return src('node_modules/bootstrap-icons/bootstrap-icons.svg')
         .pipe(dest('dist/css/icons/'));
 }
 
@@ -61,11 +73,15 @@ function updateHtml() {
     return src('index.html')
         .pipe(htmlReplace({
             'js': ['../js/jquery.min.js', '../js/bootstrap.min.js'], 
-            'css': ['../css/bootstrap.min.css', '../css/lib.min.css']
+            'css': ['../css/bootstrap.min.css', '../css/custom.css']
         }))
         .pipe(dest('dist/html'));
         
 }
 
-exports.default = this.minify;
-exports.minify = parallel(minifyJs, minifyCssFiles, copyImages, copyFonts,copyIcons, updateHtml);
+exports.clean = clean;
+exports.copy = parallel(copyImages, copyFonts, copyIcons);
+exports.minify = parallel(minifyJs, minifyCssFiles, updateHtml);
+exports.build = series(this.clean, this.minify, this.copy);
+
+exports.default = this.build;
