@@ -75,7 +75,7 @@ function updateHtml() {
             'js': ['../js/jquery.min.js', '../js/bootstrap.min.js'], 
             'css': ['../css/bootstrap.min.css', '../css/custom.css']
         }))
-        .pipe(dest('dist/html'));
+        .pipe(dest('dist/'));
         
 }
 
