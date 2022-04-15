@@ -23,6 +23,8 @@ function clean() {
 function minifyJs() {
     const sourcePaths = {
         bootstrap: "node_modules/bootstrap/dist/js/*.min.js",
+        bootstrapdomjs: "node_modules/bootstrap/js/dist/dom/*.js",
+        bootstrapjs: "node_modules/bootstrap/js/dist/*.js",
         lib: "content/js/*.js",
         //jquery: 'node_modules/jquery/dist/jquery.min.js'
     };
@@ -54,6 +56,19 @@ function minifyCssFiles() {
     return merge(minifyTasks);    
 }
 
+function copyJs() {
+    const sourcePaths = {
+        bootstrap: "node_modules/bootstrap/dist/js/*.min.js",
+        bootstrapdomjs: "node_modules/bootstrap/js/dist/dom/*.js",
+        bootstrapjs: "node_modules/bootstrap/js/dist/*.js",
+        lib: "content/js/*.js",
+        //jquery: 'node_modules/jquery/dist/jquery.min.js'
+    };
+    
+    return src('node_modules/jquery/dist/jquery.min.js')
+        .pipe(dest('dist/js/'));
+}
+
 function copyImages() {
     return src('content/images/*.*')
         .pipe(dest('dist/images/'));
@@ -72,7 +87,7 @@ function copyIcons() {
 function updateHtml() {
     return src('index.html')
         .pipe(htmlReplace({
-            'js': ['../js/jquery.min.js', '../js/bootstrap.min.js'], 
+            'js': ['../js/jquery.min.js', '../js/bootstrap.min.js', '../js/bootstrapdomjs.min.js', '../js/bootstrapjs.min.js'], 
             'css': ['../css/bootstrap.min.css', '../css/custom.css']
         }))
         .pipe(dest('dist/'));
@@ -80,8 +95,8 @@ function updateHtml() {
 }
 
 exports.clean = clean;
-exports.copy = parallel(copyImages, copyFonts, copyIcons);
+exports.copy = parallel(copyJs, copyImages, copyFonts, copyIcons);
 exports.minify = parallel(minifyJs, minifyCssFiles, updateHtml);
-exports.build = series(this.clean, this.minify, this.copy);
+exports.build = series(this.clean, this.copy);
 
 exports.default = this.build;
