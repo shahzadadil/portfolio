@@ -1,0 +1,7 @@
+.blog-list-item {
+	cursor: pointer;
+}
+
+.blog-list-item:hover {
+	opacity: 1 !important;
+}

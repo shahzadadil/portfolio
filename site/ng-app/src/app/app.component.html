@@ -1,37 +1,44 @@
 <body class="bg-gradient">
 
-    <!-- #region Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary opacity-75 bg-gradient shadow-lg">
-        <div class="container-fluid">
-            <a class="navbar-brand bg-light p-1 rounded-3" href="#">
-                <img alt="Shahzad" class="img-fluid"
-                    src="https://mypersonalstotrage.blob.core.windows.net/images/logo.svg" width="30" height="24">
-            </a>
+	<!-- #region Navigation Bar -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary opacity-75 bg-gradient shadow-lg">
+		<div class="container-fluid">
+			<a class="navbar-brand bg-light p-1 rounded-3" href="#">
+				<img alt="Shahzad" class="img-fluid"
+					src="https://mypersonalstotrage.blob.core.windows.net/images/logo.svg" width="30" height="24">
+			</a>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+				data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
 
-                <span class="navbar-toggler-icon"></span>
-            </button>
+				<span class="navbar-toggler-icon"></span>
+			</button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#" routerLink=""><i class="bi-person-lines-fill"></i>
-                            Me</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" routerLink="/blogs"><i class="bi-file-text-fill"></i> Blogs</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" routerLink="/videos"><i class="bi-file-play-fill"></i> Videos</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <!-- #endregion -->
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="#" routerLink=""><i
+								class="bi-person-lines-fill"></i>
+							Me</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#" routerLink="/blogs"><i class="bi-file-text-fill"></i> Blogs</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#" routerLink="/videos"><i class="bi-file-play-fill"></i> Videos</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<!-- #endregion -->
 
-    <router-outlet></router-outlet>
+	<div class="container-fluid mt-4">
+		<div class="row justify-content-center">
+			<div class="col-11">
+				<router-outlet></router-outlet>
+			</div>
+		</div>
+	</div>
 </body>

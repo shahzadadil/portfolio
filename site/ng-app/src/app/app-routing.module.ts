@@ -7,9 +7,9 @@ import { VideosComponent } from './videos/videos.component';
 
 const routes: Routes = [
 	{ path: '', component: PortfolioComponent},
+	{ path: 'blogs/:id', component: BlogDetailComponent},
 	{ path: 'blogs', component: BlogListComponent},
-	{ path: 'videos', component: VideosComponent},
-	{ path: 'blog/:id', component: BlogDetailComponent}
+	{ path: 'videos', component: VideosComponent}	
 ];
 
 @NgModule({

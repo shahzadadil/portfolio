@@ -1,1 +1,24 @@
-<p>blog-detail works!</p>
+<div class="row mb-3">
+	<img [src]="blogDetail.coverImage.url" [alt]="blogDetail.coverImage.title"/>
+</div>
+
+<div class="row">
+	<h1 class="display-4 text-primary">{{blogDetail.title}}</h1>
+</div>
+<div class="row">
+	<p>
+		<i class="bi-calendar text-info me-1" title="Published On"></i> <span class="fw-light me-1">{{blogDetail.publishedOn | date}}</span>
+		<i class="bi-clock text-info ms-4 me-1" title="Time To Read"></i> <span class="fw-light">{{blogDetail.minutesToRead}} min read</span>
+		<i class="bi-file-earmark-person text-info ms-4 me-1" title="Author"></i> <span
+			class="fw-light">{{blogDetail.author}}</span>
+	</p>
+</div>
+<div class="row">
+	<p class="fs-4 fw-light opacity-75 just">
+		<em>&mdash; {{blogDetail.subtitle}}</em>
+	</p>
+</div>
+<div class="row mt-3">
+	<p class="blog-content fw-light fs-5 text-justify" [innerHTML]="blogDetail.htmlBody">
+	</p>
+</div>

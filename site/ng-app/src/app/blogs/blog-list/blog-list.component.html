@@ -1,1 +1,12 @@
-<p>blog-list works!</p>
+<div class="row" *ngFor="let blogDetail of blogs" (click)="onSelectBlog(blogDetail)">
+	<div class="blog-list-item col-md-6 col-xs-12 col-xl-4 p-3 border border-2 rounded-1 bg-light opacity-75 bg-gradient shadow-sm curser">
+		<img class="img-thumbnail p-0" [src]="blogDetail.coverImage.url" [alt]="blogDetail.coverImage.title"/>
+		<h1 class="display-6 text-primary mt-1">{{blogDetail.title}}</h1>
+		<p class="mb-0">
+			<i class="bi-calendar text-info me-1" title="Published On"></i> <span class="fw-light me-1">{{blogDetail.publishedOn | date}}</span>
+			<i class="bi-clock text-info ms-4 me-1" title="Time To Read"></i> <span class="fw-light">{{blogDetail.minutesToRead}} min read</span>
+			<i class="bi-file-earmark-person text-info ms-4 me-1" title="Author"></i> <span
+				class="fw-light">{{blogDetail.author}}</span>
+		</p>
+	</div>
+</div>	
