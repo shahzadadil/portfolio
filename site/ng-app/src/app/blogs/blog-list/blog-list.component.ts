@@ -29,7 +29,6 @@ export class BlogListComponent implements OnInit {
 			})
 			.then((entries: EntryCollection<any>) => {
 				this.blogs = entries.items.map((entry) => new BlogDetail(entry));
-				console.log(entries);
 			})
 			.catch((err: Error) => console.log(err));
 	}
