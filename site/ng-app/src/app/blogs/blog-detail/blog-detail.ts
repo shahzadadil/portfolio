@@ -1,6 +1,7 @@
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import { Asset } from "contentful";
 import { ImageAsset } from "../image-asset";
+import { Meta } from "@angular/platform-browser";
 
 export class BlogDetail {
 
